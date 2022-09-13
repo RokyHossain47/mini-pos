@@ -16,14 +16,14 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <div class="form-label">Invoice Number *</div>
-                            <input type="text" name="invoice_number" placeholder="1234" class="form-control" required>
+                            <input type="text" name="invoice_number" id="invoice_number" placeholder="1234" class="form-control" required>
                         </div>
                     </div>
                     <div class="col-sm-6"></div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <div class="form-label">Date *</div>
-                            <input type="date" name="date" class="form-control" required>
+                            <input type="date" id="date" name="date" class="form-control" required>
                         </div>
                     </div>
                 </div>
@@ -43,17 +43,19 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <input type="number" value="1" name="invoice_no" class="form-control text-center">
+                                    <input type="number" value="1" id="invoice_no" name="invoice_no" class="form-control text-center">
                                 </td>
                                 <td>
-                                    <select name="category" class="form-control" id="category">
+                                    <select name="category" id="category" class="form-control" id="category">
                                         <option value="0">-Select-</option>
-                                        <option value="1">category1</option>
-                                        <option value="2">category2</option>
+                                        @foreach ($catagory as $value)
+                                            <option value="{{$value->catagory_name}}">{{$value->catagory_name}}</option>
+                                        @endforeach
+                                        
                                     </select>
                                 </td>
                                 <td>
-                                    <input type="text" name="description" class="form-control">
+                                    <input type="text" name="description" id="description" class="form-control">
                                 </td>
                                 <td>
                                     <input type="number" id="quentity" name="quentity" value="1" class="text-center form-control">
@@ -86,11 +88,110 @@
 
                         </tbody>
                     </table>
-                    <button type="submit" class="btn btn-dark w-25">Save Invoice</button>
+                    <a href="#" id="preview" class="btn btn-dark w-25" data-toggle="modal" data-target="#exampleModalCenter">Preview</a>
                 </div>
+                
             </div>
         </div>
-    </form>
+    
+    <div class="row">
+
+        <!-- Modal -->
+        <div class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle"> Invoice Preview </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                
+
+
+                <div class="card-body">
+                    <div class="invoice">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <div class="form-label">Invoice Number *</div>
+                                    <input type="text" id="invoice_number_view" placeholder="1234" class="form-control" value="" readonly>
+                                </div>
+                            </div>
+                            <div class="col-sm-6"></div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <div class="form-label">Date *</div>
+                                    <input type="date" id="date_view" value="" class="form-control" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <table class="table table-bordered text-center">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Category *</th>
+                                        <th>Description</th>
+                                        <th>Quantity *</th>
+                                        <th>Price *</th>
+                                        <th>Amount *</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <input type="number" value="1" id="invoice_no_view" value="" readonly class="form-control text-center">
+                                        </td>
+                                        <td>
+                                            <input type="text" value="1" id="category_view" value="" readonly class="form-control text-center">   
+                                        </td>
+                                        <td>
+                                            <input type="text" id="description_view" value="" readonly class="form-control">
+                                        </td>
+                                        <td>
+                                            <input type="number" id="quentity_view" value="" readonly value="1" class="text-center form-control">
+                                        </td>
+                                        <td>
+                                            <input type="number" value="" readonly id="price_view" class="form-control text-center">
+                                        </td>
+                                        <td>
+                                            <input id="amount_view" value="" readonly type="number" class="form-control text-center">
+                                        </td> 
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4" ></td>
+                                        <td><strong>Total =</strong></td>
+                                        <td>
+                                            <input type="text" id="total_view" value="" readonly class="form-control text-center" value="" readonly>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="7" class="text-left">
+                                            <strong>Attach File: </strong>
+                                            <img src="" alt="" width="80px" height="80px">
+                                        </td>  
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                    </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <strong class="mr-5 text-danger">* After Modification Click on Amount Fields *</strong>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-dark"> Save Invoice </button>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+  </div>
+</form>
     </div>
 </div>
 
@@ -127,9 +228,31 @@
                     var b = $("#price").val();
                     var sum = a * b;
                     $('#amount').val(sum);
+                    
+                });
+                $("#amount").click(function(){
+                    var invoice_number = $("#invoice_number").val();
+                    var date = $("#date").val();
+                    var invoice_no = $("#invoice_no").val();
+                    var category = $("#category").val();
+                    var description = $("#description").val();
+                    var quentity = $("#quentity").val();
+                    var price = $("#price").val();
+                    var amount = $("#amount").val();
+                    var total = $("#total").val();
+                    $('#invoice_number_view').val(invoice_number);
+                    $('#date_view').val(date);
+                    $('#invoice_no_view').val(invoice_no);
+                    $('#category_view').val(category);
+                    $('#description_view').val(description);
+                    $('#quentity_view').val(quentity);
+                    $('#price_view').val(price);
+                    $('#amount_view').val(amount);
+                    $('#total_view').val(total);
                 });
 
             }); 
         </script>
+        
 
 @endsection

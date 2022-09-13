@@ -29,9 +29,9 @@
                     @foreach ($post as $value)
                     <tr>
                         <td>{{$value->id}}</td>
-                        <td>{{$value->date}}</td>
                         <td>{{$value->invoice_number}}</td>
                         <td>{{$value->invoice_no}}</td>
+                        <td>{{$value->date}}</td>
                         <td>{{$value->category}}</td>
                         <td>{{$value->quentity}}</td>
                         <td>{{$value->price}}</td>

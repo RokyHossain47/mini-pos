@@ -7,6 +7,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\CatagoryController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -25,4 +26,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('users', UserController::class);
     Route::resource('roles', RoleController::class);
     Route::resource('permissions', PermissionController::class);
+    
+    Route::get('/catagory-list', [CatagoryController::class, 'index'])->name('catagory.index');
+    Route::get('/catagory-create', [CatagoryController::class, 'create'])->name('catagory.create');
+    Route::put('/catagory-create', [CatagoryController::class, 'store'])->name('catagory.create');
+
 });

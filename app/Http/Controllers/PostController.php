@@ -41,8 +41,10 @@ class PostController extends Controller
      */
     public function create()
     {
-
-        return view('post.create');
+        $data['catagory'] = DB::table('catagory')
+        ->select('*')
+        ->get();
+        return view('post.create', $data);
     }
 
     /**
@@ -83,7 +85,7 @@ class PostController extends Controller
         );
        $insert = DB::table('posts')->insert($data);
        if($insert){
-            return redirect('post')->with('status', 'Successfully updated');
+            return redirect('post')->with('status', 'Successfully Added');
        }else{
             return redirect('post')->with('error', 'Something Went Wrong');
        }

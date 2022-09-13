@@ -36,19 +36,7 @@
                                 </li>
                             @endif
                         @else
-                            @can('user-list')
-                                <li><a class="nav-link" href="{{ route('users.index') }}">Users</a></li>
-                            @endcan
-                            @can('role-list')
-                                <li><a class="nav-link" href="{{ route('roles.index') }}">Roles</a></li>
-                            @endcan
-                            @can('permission-list')
-                                <li><a class="nav-link" href="{{ route('permissions.index') }}">Permission</a></li>
-                            @endcan
-                        
-                            @can('post-list')
-                                <li><a class="nav-link" href="{{ route('post.index') }}">Post</a></li>
-                            @endcan
+                           
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
@@ -69,26 +57,53 @@
                 </div>
             </div>
         </nav>
-        <main class="py-4">
-            <div class="container">
-                @if (session('status')) 
-                <div class="alert alert-success">
-                    {{ session('status') }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div> 
-                @endif
-                @if($errors->any()) 
-                  <div class="alert alert-danger">
-                    {{$errors->first()}}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div> 
-                @endif 
+        <main class="py-4 container">
+            <div class="row">
+                <div class="col-sm-2 p-0">
+                    <div class="">
+                            <a class="nav-link btn btn-outline-dark text-left {{ request()->is('home') ? 'active' : '' }}" href="{{ route('home') }}">Dashboard</a> 
+                        
+                        @can('user-list')
+                            <a class="nav-link btn btn-outline-dark text-left {{ request()->is('users') ? 'active' : '' }}" href="{{ route('users.index') }}">Users</a> 
+                        @endcan
+                        @can('catagory-list')
+                            <a class="nav-link btn btn-outline-dark text-left {{ request()->is('catagory-list') ? 'active' : '' }}" href="{{ route('catagory.index') }}">Catagory</a>   
+                        @endcan
+                        @can('role-list')
+                                <a class="nav-link btn btn-outline-dark text-left {{ request()->is('role-list') ? 'active' : '' }}" href="{{ route('roles.index') }}">Roles</a> 
+                        @endcan
+                        @can('permission-list')
+                                <a class="nav-link btn btn-outline-dark text-left {{ request()->is('permission-list') ? 'active' : '' }}" href="{{ route('permissions.index') }}">Permission</a>  
+                        @endcan
+                        
+                        @can('post-list')
+                                <a class="nav-link btn btn-outline-dark text-left {{ request()->is('post-list') ? 'active' : '' }}" href="{{ route('post.index') }}">Post</a>   
+                        @endcan
+                    </div>
+                    
+                </div>
+                <div class="col-sm-10">
+                    @if (session('status')) 
+                        <div class="alert mx-3 alert-success">
+                            {{ session('status') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div> 
+                        @endif
+                        @if($errors->any()) 
+                          <div class="alert mx-3 alert-danger">
+                            {{$errors->first()}}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div> 
+                        @endif 
+                    @yield('content')
+                </div>
             </div>
-            @yield('content')
+            
+            
         </main>
     </div>
 
