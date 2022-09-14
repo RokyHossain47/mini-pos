@@ -1,0 +1,45 @@
+
+.active0{
+  background-color: #28a745 !important;
+}
+.active0:hover{
+color:#000 !important;
+}
+.active1{
+  background-color: #e3e3e3 !important;
+  color:#000 !important;
+}
+.active1:hover{
+  color:#28a745 !important;
+}
+.fa-sign-out-alt{
+    font-size: 2rem;
+}
+
+/* webstie  */
+.cart-body{
+  padding: 0px;
+
+}
+.cart-table{
+  padding: 10px;
+}
+.shoping-cart, .product{
+  padding-top: 40px;
+}
+.checkout{
+  padding-top: 30px !important;
+}
+.chackout-note{
+  padding-bottom: 0px !important;
+}
+.main-header a{
+  color:white !important;
+}
+.login-form{
+  margin: 0rem 25rem;
+}
+.basisLogo{
+  padding: 13.5rem 0rem;
+}
+

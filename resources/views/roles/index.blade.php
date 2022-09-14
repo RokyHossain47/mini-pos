@@ -16,12 +16,12 @@
                 @endcan
             </div>
             <div class="card-body">
-                <table class="table table-hover">
+                <table id="example1" class="table table-hover">
                     <thead class="thead-dark">
                         <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th width="280px">Action</th>
+                            <th class="col-4">#</th>
+                            <th class="col-4">Name</th>
+                            <th class="col-4">Action</th>
                         </tr>
                     </thead>
                     <tbody>

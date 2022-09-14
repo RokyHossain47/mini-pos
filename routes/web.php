@@ -20,6 +20,10 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/post', [PostController::class, 'index'])->name('post.index');
 Route::get('/create', [PostController::class, 'create'])->name('post.create');
 Route::put('/create', [PostController::class, 'store'])->name('post.create');
+Route::get('/edit/{id}', [PostController::class, 'edit'])->name('post.edit');
+Route::post('/edit/{id}', [PostController::class, 'update'])->name('post.update');
+Route::delete('/destroy/{id}', [PostController::class, 'destroy'])->name('post.destroy');
+
 
 
 Route::group(['middleware' => ['auth']], function() {

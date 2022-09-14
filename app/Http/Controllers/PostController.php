@@ -110,7 +110,14 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-       //
+        $data['posts'] = DB::table('posts')
+        ->select('*')
+        ->where('id', $id)
+        ->first();
+        $data['catagory'] = DB::table('catagory')
+        ->select('*')
+        ->get();
+        return view ('post.edit', $data);
     }
 
     /**
@@ -122,7 +129,37 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'invoice_number' => 'required',
+            'date' => 'required',
+            'invoice_no' => 'required',
+            'category' => 'required',
+            'description' => 'required|max:255',
+            'quentity' => 'required',
+            'price' => 'required',
+            'amount' => 'required',
+            'total' => 'required',
+        ]);
+       
+                
+        $data = array(
+            'invoice_number' => $request->input('invoice_number'),
+            'date'      => $request->input('date'),
+            'invoice_no'       => $request->input('invoice_no'),
+            'category'       => $request->input('category'),
+            'description'       => $request->input('description'),
+            'quentity'       => $request->input('quentity'),
+            'price'       => $request->input('price'),
+            'amount'       => $request->input('amount'),
+            'total'       => $request->input('total'),
+            
+        );
+       $update = DB::table('posts')->where('id', $id)->update($data);
+       if($update){
+            return redirect('post')->with('status', 'Successfully Added');
+       }else{
+            return redirect('post')->with('error', 'Something Went Wrong');
+       }
     }
 
     /**
@@ -133,6 +170,12 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = DB::table('posts') ->where('id',$id)->delete();
+ 
+         if($delete){
+             return redirect('post')->with('status','Successfully deleted');
+         }else{
+             return redirect('post')->with('error','Something wrong');
+         }
     }
 }

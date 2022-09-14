@@ -14,14 +14,14 @@
                 </span>
             </div>
             <div class="card-body">
-                <table class="table">
+                <table id="example1" class="table">
                     <thead class="thead-dark">
                         <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Roles</th>
-                            <th width="280px">Action</th>
+                            <th class="col-2">#</th>
+                            <th class="col-2">Name</th>
+                            <th class="col-2">Email</th>
+                            <th class="col-2">Roles</th>
+                            <th class="col-3">Action</th>
                         </tr>
                     </thead>
                     <tbody>
